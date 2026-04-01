@@ -97,6 +97,88 @@ output_dir/                          # --output_dir 指定的路径
 
 ---
 
+## 📂 输出文件说明
+
+运行 `runmat.py` 后，结果按处理阶段分为三层，依次写入输出目录：
+
+### 第一层：预处理 → 投影矩阵（Projections/）
+
+DLC CSV 经过置信度过滤 → 线性插值 → 自我中心转换 → 体型归一化 → 展平后，生成投影矩阵：
+
+```
+Projections/
+├── {name}_pcaModes.mat                 # ★ 投影矩阵 (N帧, 20维)，整条管道的核心中间产物
+├── {name}_pcaModes_trainingtSNE.png    # 训练集子采样嵌入散点图（质量检查用）
+├── {name}_pcaModes_uVals.mat           # 该数据集所有帧的 UMAP 2D 嵌入坐标 (N帧, 2)
+└── {name}_pcaModes_uVals_stats.pkl     # 嵌入过程统计信息（距离、邻居数等）
+```
+
+其中 `{name}` 来源于输入 CSV 的文件名（如 `20080321162447`）。`_pcaModes.mat` 是最关键的中间文件——后续的小波变换、降维、分区全部以它为输入。如果你有多个 CSV，这里会为每个 CSV 各生成一组文件。
+
+### 第二层：降维嵌入（UMAP/）
+
+从投影矩阵中子采样训练集，做小波变换后训练 UMAP 模型，再将全部数据重嵌入到 2D 空间：
+
+```
+UMAP/
+├── training_data.mat                   # 子采样训练集的小波特征 (trainingSetSize, 特征维度)
+├── training_amps.mat                   # 训练集振幅（小波能量归一化用）
+├── training_embedding.mat              # 训练集的 UMAP 2D 嵌入坐标
+├── umap.model                          # ★ 训练好的 UMAP 模型（~38MB，可直接对新数据重嵌入）
+└── _trainMeanScale.npy                 # 训练集均值和缩放参数（新数据归一化对齐用）
+```
+
+`umap.model` + `_trainMeanScale.npy` 配合使用，就能把新数据直接嵌入到同一个行为空间，无需重新训练。
+
+### 第三层：行为分区（UMAP/ + 根目录）
+
+在 2D 嵌入空间上做密度估计，再用 Watershed 分水岭算法切分行为簇：
+
+```
+UMAP/
+├── zVals_wShed_groups.mat              # ★★ 最终核心结果：所有帧的 2D 坐标 + 行为簇标签
+└── zWshed20.png                        # Watershed 分区可视化（20 = minimum_regions 参数）
+
+根目录/
+└── behavior_map.png                    # 总览图：左-密度热图，右-分区散点图
+```
+
+`zVals_wShed_groups.mat` 包含两个字段：`zValues`（每帧 2D 坐标）和 `watershedRegions`（每帧行为簇编号 1~K）。后续所有分析——行为占比统计、转移矩阵、与实验条件关联——都从这个文件开始。
+
+### 关键文件速查
+
+| 你想做什么 | 需要的文件 |
+|-----------|-----------|
+| 查看最终行为分类结果 | `UMAP/zVals_wShed_groups.mat` |
+| 对新数据做行为分类（不重新训练） | `UMAP/umap.model` + `UMAP/_trainMeanScale.npy` |
+| 追溯某一帧的原始姿态特征 | `Projections/{name}_pcaModes.mat` |
+| 快速看一眼结果好不好 | `behavior_map.png` |
+| 检查训练集采样是否合理 | `Projections/{name}_pcaModes_trainingtSNE.png` |
+
+### 如何读取核心结果
+
+```python
+import hdf5storage
+import numpy as np
+
+# 加载 Watershed 结果
+data = hdf5storage.loadmat('MouseMotion/UMAP/zVals_wShed_groups.mat')
+
+zValues = data['zValues']                    # shape: (N帧, 2) — 行为空间坐标
+labels  = data['watershedRegions'].flatten() # shape: (N帧,)   — 行为簇编号 (1~K)
+
+# 查看有多少个行为簇
+print(f'行为簇数: {int(labels.max())}')
+print(f'总帧数:   {len(labels)}')
+
+# 统计每个簇的帧数占比
+for k in range(1, int(labels.max()) + 1):
+    pct = np.mean(labels == k) * 100
+    print(f'  簇 {k:2d}: {pct:.1f}%')
+```
+
+---
+
 ## 🛠️ 环境配置
 
 ### Conda 环境（Python 3.6，已验证可用）
