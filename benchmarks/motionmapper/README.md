@@ -1,4 +1,4 @@
-# MotionMapper 小鼠行为无监督分析复现
+  # MotionMapper 小鼠行为无监督分析复现
 
 基于 [motionmapperpy](https://github.com/bermanlabemory/motionmapperpy) 的小鼠行为无监督聚类分析管道。  
 输入 DeepLabCut (DLC) 关键点坐标 CSV，输出行为密度地图与行为簇划分。
