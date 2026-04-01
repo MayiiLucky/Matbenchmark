@@ -1,0 +1,165 @@
+# Project definitions (do not edit)
+Task: MouseBehavior
+scorer: hilda
+date: Mar25
+multianimalproject: false
+identity:
+
+
+# Project path (change when moving around)
+project_path: /home/hilda/projects/MouseBehavior-hilda-2026-03-25
+
+
+# Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
+engine: pytorch
+
+
+# Annotation data set configuration (and individual video cropping parameters)
+video_sets:
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/head_5.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/drink_1.mpg:
+    crop: 0, 360, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/groom_3.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/walk_4.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/drink_3.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/rear_2.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/hang_3.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/hang_4.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/rest_3.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/eat_5.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/eat_4.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/drink_4.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/drink_2.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/groom_5.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/eat_1.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/rest_2.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/head_3.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/eat_2.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/rest_4.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/hang_2.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/rest_1.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/head_4.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/hang_5.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/rear_3.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/rear_1.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/walk_2.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/rest_5.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/rear_4.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/rear_5.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/hang_1.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/head_1.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/walk_5.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/groom_1.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/groom_2.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/eat_3.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/walk_1.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/walk_3.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/head_2.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/groom_4.mpg:
+    crop: 0, 320, 0, 240
+  /home/hilda/projects/MouseBehavior-hilda-2026-03-25/videos/drink_5.mpg:
+    crop: 0, 320, 0, 240
+bodyparts:
+- nose
+- left_ear
+- right_ear
+- neck
+- spine1
+- tailbase
+- left_forepaw
+- right_forepaw
+- left_hindpaw
+- right_hindpaw
+
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+start: 0
+stop: 1
+numframes2pick: 8
+
+
+# Plotting configuration
+skeleton:
+- [nose, left_ear]
+- [nose, right_ear]
+- [nose, neck]
+- [neck, spine1]
+- [spine1, tailbase]
+- [neck, left_forepaw]
+- [neck, right_forepaw]
+- [tailbase, left_hindpaw]
+- [tailbase, right_hindpaw]
+skeleton_color: white
+pcutoff: 0.6
+dotsize: 2
+alphavalue: 0.7
+colormap: rainbow
+
+
+# Training,Evaluation and Analysis configuration
+TrainingFraction:
+- 0.95
+iteration: 0
+default_net_type: resnet_50
+default_augmenter: default
+snapshotindex: -1
+detector_snapshotindex: -1
+batch_size: 8
+detector_batch_size: 1
+
+
+# Cropping Parameters (for analysis and outlier frame detection)
+cropping: false
+#if cropping is true for analysis, then set the values here:
+x1: 0
+x2: 640
+y1: 277
+y2: 624
+
+
+# Refinement configuration (parameters from annotation dataset configuration also relevant in this stage)
+corner2move2:
+- 50
+- 50
+move2corner: true
+
+
+# Conversion tables to fine-tune SuperAnimal weights
+SuperAnimalConversionTables:
