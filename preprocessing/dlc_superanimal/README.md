@@ -29,65 +29,49 @@ pip install deeplabcut==2.3.11
 
 ## 三、关键代码
 
-### `run_dlc.py`
+### 运行
 
-```python
-import os
-
-# GPU 配置
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-os.environ["TF_FORCE_GPU_ALLOW_GROWTH"] = "true"
-
-import tensorflow as tf
-
-# 验证 GPU
-gpus = tf.config.list_physical_devices('GPU')
-if gpus:
-    for gpu in gpus:
-        tf.config.experimental.set_memory_growth(gpu, True)
-    print(f"找到 {len(gpus)} 个 GPU: {[g.name for g in gpus]}")
-else:
-    print("警告: 未找到 GPU，将使用 CPU 运行")
-
-import deeplabcut
-
-deeplabcut.video_inference_superanimal(
-    videos=["/root/MouseMotion/videos/YOUR_VIDEO.mpg"],
-    superanimal_name="superanimal_topviewmouse",
-    videotype=".mpg",
-    pcutoff=0.1
-)
-```
-
-### 一键写入并运行
+**用法：**
 
 ```bash
-cat > /root/MouseMotion/run_dlc.py << 'EOF'
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-os.environ["TF_FORCE_GPU_ALLOW_GROWTH"] = "true"
-
-import tensorflow as tf
-gpus = tf.config.list_physical_devices('GPU')
-if gpus:
-    for gpu in gpus:
-        tf.config.experimental.set_memory_growth(gpu, True)
-    print(f"找到 {len(gpus)} 个 GPU: {[g.name for g in gpus]}")
-else:
-    print("警告: 未找到 GPU，将使用 CPU 运行")
-
-import deeplabcut
-deeplabcut.video_inference_superanimal(
-    videos=["/root/MouseMotion/videos/YOUR_VIDEO.mpg"],
-    superanimal_name="superanimal_topviewmouse",
-    videotype=".mpg",
-    pcutoff=0.1
-)
-EOF
-
-python /root/MouseMotion/run_dlc.py
+python run_dlc.py --video_dir 视频目录 [选项]
 ```
 
+**参数：**
+
+| 参数 | 说明 | 默认值 |
+|------|------|--------|
+| `--video_dir` | 视频所在目录（必填） | — |
+| `--videos` | 指定具体文件名，多个用空格分隔（可选，不填则处理目录下所有视频） | 全部视频 |
+| `--videotype` | 视频格式 | `.mp4` |
+| `--pcutoff` | 置信度阈值 | `0.1` |
+| `--model` | SuperAnimal 模型 | `superanimal_topviewmouse` |
+
+**示例：**
+
+- 处理目录下所有 mp4：
+
+```bash
+python run_dlc.py --video_dir /root/MouseMotion/videos
+```
+
+- 指定处理 A、B、C：
+
+```bash
+python run_dlc.py --video_dir /root/MouseMotion/videos --videos A.mp4 B.mp4 C.mp4
+```
+
+- 处理 mpg 格式：
+
+```bash
+python run_dlc.py --video_dir /root/MouseMotion/videos --videotype .mpg
+```
+
+- 调整置信度阈值：
+
+```bash
+python run_dlc.py --video_dir /root/MouseMotion/videos --videos C.mp4 --pcutoff 0.3
+```
 ---
 
 ## 四、输出文件
