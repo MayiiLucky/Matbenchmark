@@ -8,31 +8,76 @@
 
 ```
 .
-├── datasets/                          # 数据集
-│   └── mouse_20080321/
-│       ├── raw_video/                 # 原始视频
-│       ├── labeled_video/             # DLC 标注后视频
-│       ├── keypoints/
-│       │   ├── keypoints.csv          # 关键点坐标
-│       │   └── confidence.csv         # 置信度
-│       └── README.md
+Matbenchmark/
 │
-├── benchmarks/                        # 方法复现
-│   ├── motionmapper/
-│   │   ├── scripts/                   # 核心脚本
-│   │   ├── environment/               # 环境配置
-│   │   ├── results/
-│   │   │   └── mouse_20080321/
-│   │   │       ├── behavior_map.png
-│   │   │       ├── pcaModes.mat
-│   │   │       ├── umap_embedding.mat
-│   │   │       └── clusters.mat
-│   │   └── README.md
-│   ├── vame/
-│   └── b-soid/
+├── 📄 README.md                    # 主项目文档 (2.5 KB)
+│   └── 包含：项目概述、方法对比表、数据集说明、快速开始
 │
-├── utils/                             # 通用工具
-└── docs/                              # 文档
+├── 📁 benchmarks/                  # ★ 核心：行为分析方法复现
+│   │
+│   ├── motionmapper/               # ✅ MotionMapper (Berman et al. 2014)
+│   │   ├── README.md               # 详细复现指南 (262 行，9.7 KB)
+│   │   │   └── 内容：方法架构、项目结构、输出文件说明、环境配置、参数详解
+│   │   │
+│   │   ├── scripts/                # 执行脚本
+│   │   │   └── runmat.py           # 主运行脚本 (9.3 KB)
+│   │   │       └── 功能：DLC CSV → MotionMapper 完整流程
+│   │   │       └── 参数：csv_dir, output_dir, pattern, method, fps, pcutoff
+│   │   │
+│   │   ├── environment/            # 环境配置
+│   │   │   └── dlc_config.yaml     # DeepLabCut 配置文件 (5.5 KB)
+│   │   │
+│   │   └── results/                # 运行结果
+│   │       ├── mouse_20080321/
+│   │       │   ├── behavior_map.png          # 行为密度热图 + 分区可视化 (481 KB)
+│   │       │   └── zVals_wShed_groups.mat    # 核心结果：2D坐标 + 簇标签 (2.2 MB)
+│   │       │
+│   │       └── mousetop_20080321/
+│   │           └── .gitkeep        # (占位符)
+│   │
+│   ├── vame/                       # 🚧 VAME (Luxem et al. 2022) [规划中]
+│   └── b-soid/                     # 📋 B-SOiD (Hsu & Yttri 2021) [规划中]
+│
+│
+├── 📁 datasets/                    # ★ 数据集：关键点标注数据
+│   │
+│   ├── mouse_20080321/             # 侧视角小鼠视频数据
+│   │   └── keypoints/
+│   │       └── keypoints.csv       # 关键点坐标 (20 MB)
+│   │           └── 格式：10个关键点 × (x,y)坐标
+│   │
+│   ├── mousetop_20080321/          # 俯视角小鼠视频数据
+│   │   ├── keypoints.csv           # 关键点坐标 (78 MB)
+│   │   └── keypoints.h5            # 同数据HDF5格式 (43 MB)
+│   │
+│   └── writhing_ABC/               # 新增：三只个体的运动数据
+│       ├── A/
+│       │   ├── keypoints.csv       # 关键点坐标 (2.1 MB)
+│       │   └── labeled.mp4         # 标注后视频 (9.9 MB)
+│       │
+│       ├── B/                      # (空目录)
+│       └── C/                      # (空目录)
+│
+│
+├── 📁 preprocessing/               # ★ 数据预处理：关键点提取方法
+│   │
+│   ├── dlc_custom/                 # 自训练 DeepLabCut 模型
+│   │   ├── README.md               # DLC 完整教程 (333 行，7.3 KB)
+│   │   │   └── 内容：从项目创建→标注→训练→推理的11步完整指南
+│   │   │
+│   │   └── .gitkeep                # (占位符)
+│   │
+│   └── dlc_superanimal/            # SuperAnimal 预训练模型
+│       ├── README.md               # SuperAnimal 快速指南 (3.4 KB)
+│       ├── pose_cfg.yaml           # 姿态配置文件 (7.2 KB)
+│       └── run_dlc.py              # 推理脚本 (1.6 KB)
+│
+│
+└── 📊 统计信息
+    ├── 总大小：82.5 MB
+    ├── 主要数据文件：3+ GB (LFS)
+    ├── 创建时间：32天前
+    └── 最后更新：4天前 (2026-04-27)
 ```
 
 ---
